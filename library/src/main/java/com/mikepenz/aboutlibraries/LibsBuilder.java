@@ -1,16 +1,13 @@
 package com.mikepenz.aboutlibraries;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.LayoutAnimationController;
 
 import com.mikepenz.aboutlibraries.entity.Library;
 import com.mikepenz.aboutlibraries.ui.LibsActivity;
-import com.mikepenz.aboutlibraries.ui.LibsFragment;
 import com.mikepenz.aboutlibraries.ui.LibsSupportFragment;
 import com.mikepenz.aboutlibraries.ui.item.LibraryItem;
 import com.mikepenz.aboutlibraries.util.Colors;
@@ -37,6 +34,7 @@ public class LibsBuilder implements Serializable {
     public Boolean showVersion = false;
 
     public Boolean aboutShowIcon = null;
+    public String aboutVersionString = null;
     public String aboutAppName = null;
     public Boolean aboutShowVersion = null;
     public String aboutDescription = null;
@@ -221,6 +219,17 @@ public class LibsBuilder implements Serializable {
     }
 
     /**
+     * Builder method to enable the display and set the text of the application version in the about this app view
+     *
+     * @param aboutVersionString
+     * @return this
+     */
+    public LibsBuilder withAboutVersionString(String aboutVersionString) {
+        this.aboutVersionString = aboutVersionString;
+        return this;
+    }
+
+    /**
      * Builder method to enable the display and set the text of the application name in the about this app view
      *
      * @param aboutAppName the name of this application
@@ -361,7 +370,7 @@ public class LibsBuilder implements Serializable {
      */
     public LibsBuilder withLibraryModification(String library, Libs.LibraryFields modificationKey, String modificationValue) {
         if (this.libraryModification == null) {
-            this.libraryModification = new HashMap<String, HashMap<String, String>>();
+            this.libraryModification = new HashMap<>();
         }
 
         if (!libraryModification.containsKey(library)) {
@@ -525,22 +534,6 @@ public class LibsBuilder implements Serializable {
      */
     public void activity(Context ctx) {
         start(ctx);
-    }
-
-
-    /**
-     * fragment() method to build and create the fragment with the set params
-     *
-     * @return the fragment to set in your application
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public LibsFragment fragment() {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("data", this);
-
-        LibsFragment fragment = new LibsFragment();
-        fragment.setArguments(bundle);
-        return fragment;
     }
 
     /**

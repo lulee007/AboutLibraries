@@ -16,6 +16,7 @@ import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.LibsConfiguration;
 import com.mikepenz.aboutlibraries.entity.Library;
 import com.mikepenz.aboutlibraries.ui.LibsSupportFragment;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
@@ -45,7 +46,6 @@ public class FragmentActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.action_manifestactivity).withIdentifier(R.id.action_manifestactivity).withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.action_extendactivity).withIdentifier(R.id.action_extendactivity).withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.action_customsortactivity).withIdentifier(R.id.action_customsortactivity).withSelectable(false),
-                        new PrimaryDrawerItem().withName(R.string.action_customactivity).withIdentifier(R.id.action_customactivity).withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.action_opensource).withIdentifier(R.id.action_opensource).withSelectable(false)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -64,9 +64,6 @@ public class FragmentActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else if (id == R.id.action_customsortactivity) {
                             Intent intent = new Intent(getApplicationContext(), CustomSortActivity.class);
-                            startActivity(intent);
-                        } else if (id == R.id.action_customactivity) {
-                            Intent intent = new Intent(getApplicationContext(), CustomActivity.class);
                             startActivity(intent);
                         } else if (id == R.id.action_manifestactivity) {
                             new LibsBuilder()
@@ -116,7 +113,7 @@ public class FragmentActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onLibTaskFinished() {
+        public void onLibTaskFinished(FastItemAdapter fastItemAdapter) {
             Log.e("AboutLibraries", "finished");
         }
     };
